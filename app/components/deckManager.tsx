@@ -1,6 +1,3 @@
-//planechase: "https://api.scryfall.com/cards/search?q=set%3Aohop&unique=cards"
-//pc-cardback: "https://backs.scryfall.io/large/7/8/7840c131-f96b-4700-9347-2215c43156e6.jpg?1665006192"
-
 type Card = {
   name: string
   oracleId: string
@@ -23,6 +20,7 @@ const fetchDeck = async (url: string) => {
     return card
   })
 
+  console.log("!A new Deck has been created!")
   return deck
 }
 
@@ -33,15 +31,7 @@ const shuffleArray = (array: any[]) => {
     array[i] = array[j]
     array[j] = temp
   }
+  console.log("!The Array has been shuffled!")
 }
 
-const coverDeck = (deck: Card[], url: string) => {
-  deck.unshift({
-    name: "TOPDECK",
-    oracleId: "",
-    oracleText: "",
-    imgUrl: url,
-  })
-}
-
-export { type Card, fetchDeck, coverDeck, shuffleArray }
+export { type Card, fetchDeck, shuffleArray }

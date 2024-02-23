@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useState } from "react"
+import React, { useEffect } from "react"
 import { MdKeyboardBackspace, MdOutlineRestartAlt } from "react-icons/md"
 import useLocalStorage from "../components/useLocalStorage"
 import { Card, fetchDeck, shuffleArray } from "../components/deckManager"
@@ -10,7 +10,7 @@ const Planechase = () => {
 
   const [deck, setDeck] = useLocalStorage("deck", "")
   const [index, setIndex] = useLocalStorage("index", -1)
-  const [topdeck, setTopdeck] = useLocalStorage("url", cardback)
+  const [topCard, setTopCard] = useLocalStorage("url", cardback)
 
   const createPlanarDeck = async () => {
     console.log("!FETCHING A DECK FROM THE INTERNET!")
@@ -24,7 +24,8 @@ const Planechase = () => {
   }, [])
 
   useEffect(() => {
-    index >= 0 ? setTopdeck(deck[index].imgUrl) : setTopdeck(cardback)
+    if (deck === undefined || deck === "") createPlanarDeck()
+    index >= 0 ? setTopCard(deck[index].imgUrl) : setTopCard(cardback)
   }, [index])
 
   const nextCard = () => {
@@ -40,13 +41,22 @@ const Planechase = () => {
   }
 
   const newGame = () => {
-    console.log(deck)
+    if (deck !== "") {
+      const temp: Card[] = [...deck]
+      const firstCard: String = temp[0].name
+
+      //Sekotetaan niin monta kertaa että alkaa eri kortilla
+      while (temp[0].name === firstCard) shuffleArray(temp)
+
+      setDeck(temp)
+      setIndex(-1)
+    }
   }
 
   return (
     <div className="min-h-screen flex flex-col items-center">
       <div key="deck" className="relative lg:rotate-90">
-        <img key="topdeck" src={topdeck} className="rounded-[3.7rem] lg:rounded-[2.5rem] w-screen lg:w-auto" />
+        <img key="topdeck" src={topCard} className="rounded-[3.7rem] lg:rounded-[2.5rem] w-screen lg:w-auto" />
         <div className="absolute top-0 left-0 w-full flex justify-between p-3">
           <button
             onClick={nextCard}
