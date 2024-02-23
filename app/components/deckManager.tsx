@@ -1,7 +1,7 @@
 //planechase: "https://api.scryfall.com/cards/search?q=set%3Aohop&unique=cards"
 //pc-cardback: "https://backs.scryfall.io/large/7/8/7840c131-f96b-4700-9347-2215c43156e6.jpg?1665006192"
 
-interface Card {
+type Card = {
   name: string
   oracleId: string
   oracleText: string
