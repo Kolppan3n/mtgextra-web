@@ -20,7 +20,8 @@ const fetchDeck = async (url: string) => {
     return card
   })
 
-  console.log("!A new Deck has been created!")
+  console.log("! A New deck has been created !")
+
   return deck
 }
 
@@ -31,7 +32,7 @@ const shuffleArray = (array: any[]) => {
     array[i] = array[j]
     array[j] = temp
   }
-  console.log("!The Array has been shuffled!")
+  console.log("! The Array has been shuffled !")
 }
 
 export { type Card, fetchDeck, shuffleArray }

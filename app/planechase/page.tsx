@@ -13,7 +13,6 @@ const Planechase = () => {
   const [topCard, setTopCard] = useLocalStorage("url", cardback)
 
   const createPlanarDeck = async () => {
-    console.log("!FETCHING A DECK FROM THE INTERNET!")
     const temp = await fetchDeck("https://api.scryfall.com/cards/search?q=set%3Aohop&unique=cards")
     shuffleArray(temp)
     setDeck(temp)
@@ -24,19 +23,22 @@ const Planechase = () => {
   }, [])
 
   useEffect(() => {
-    if (deck === undefined || deck === "") createPlanarDeck()
-    index >= 0 ? setTopCard(deck[index].imgUrl) : setTopCard(cardback)
+    if (deck === undefined || deck === "") {
+      createPlanarDeck()
+    } else {
+      index >= 0 ? setTopCard(deck[index].imgUrl) : setTopCard(cardback)
+    }
   }, [index])
 
   const nextCard = () => {
     if (index < deck.length - 1) {
-      setIndex(index + 1)
+      setIndex((prev: number) => prev + 1)
     }
   }
 
   const prevCard = () => {
     if (index > -1) {
-      setIndex(index - 1)
+      setIndex((prev: number) => prev - 1)
     }
   }
 
@@ -56,7 +58,11 @@ const Planechase = () => {
   return (
     <div className="min-h-screen flex flex-col items-center">
       <div key="deck" className="relative lg:rotate-90">
-        <img key="topdeck" src={topCard} className="rounded-[3.7rem] lg:rounded-[2.5rem] w-screen lg:w-auto" />
+        <img
+          key="topdeck"
+          src={Boolean(deck) && index >= 0 ? deck[index].imgUrl : cardback}
+          className="rounded-[3.7rem] lg:rounded-[2.5rem] w-screen lg:w-auto"
+        />
         <div className="absolute top-0 left-0 w-full flex justify-between p-3">
           <button
             onClick={nextCard}

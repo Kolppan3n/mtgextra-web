@@ -19,7 +19,7 @@ const useLocalStorage = (key: string, initValue: any) => {
   })
 
   useEffect(() => {
-    console.log("!Value Updated!")
+    console.log("! Value Updated !")
     localStorage.setItem(key, JSON.stringify(value))
   }, [value])
 
