@@ -60,18 +60,18 @@ const Planechase = () => {
             onClick={nextCard}
             className="rounded-full bg-gradient-radial from-black active:from-brass active:to-brass"
           >
-            <MdKeyboardBackspace className="size-24 rotate-90 fill-brass active:fill-black" />
+            <MdKeyboardBackspace className="size-16 sm:size-24 rotate-90 fill-brass active:fill-black" />
           </button>
           <button
             onClick={newGame}
             className="rounded-full bg-gradient-radial from-black active:from-brass active:to-brass"
           >
-            <MdOutlineRestartAlt className="size-24 -rotate-90 fill-brass active:fill-black" />
+            <MdOutlineRestartAlt className="size-16 sm:size-24 -rotate-90 fill-brass active:fill-black" />
           </button>
         </div>
         <div onClick={prevCard} className="absolute bottom-0 left-0 w-full  flex justify-between p-3">
           <button className="rounded-full bg-gradient-radial from-black active:from-brass active:to-brass">
-            <MdKeyboardBackspace className="size-24 -rotate-90 fill-brass active:fill-black" />
+            <MdKeyboardBackspace className="size-16 sm:size-24 -rotate-90 fill-brass active:fill-black" />
           </button>
         </div>
       </div>
