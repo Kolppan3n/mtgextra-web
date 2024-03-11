@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { MdKeyboardBackspace, MdOutlineRestartAlt } from "react-icons/md"
 import useLocalStorage from "../components/useLocalStorage"
 import { Card, fetchDeck, shuffleArray } from "../components/deckManager"
@@ -10,7 +10,7 @@ const Planechase = () => {
 
   const [deck, setDeck] = useLocalStorage("deck", "")
   const [index, setIndex] = useLocalStorage("index", -1)
-  const [topCard, setTopCard] = useLocalStorage("url", cardback)
+  const [topCard, setTopCard] = useState(cardback)
 
   const createPlanarDeck = async () => {
     const temp = await fetchDeck("https://api.scryfall.com/cards/search?q=set%3Aohop&unique=cards")
@@ -23,11 +23,7 @@ const Planechase = () => {
   }, [])
 
   useEffect(() => {
-    if (deck === undefined || deck === "") {
-      createPlanarDeck()
-    } else {
-      index >= 0 ? setTopCard(deck[index].imgUrl) : setTopCard(cardback)
-    }
+    setTopCard(deck[index]?.imgUrl ?? cardback)
   }, [index])
 
   const nextCard = () => {
@@ -58,11 +54,7 @@ const Planechase = () => {
   return (
     <div className="min-h-screen flex flex-col items-center">
       <div key="deck" className="relative lg:rotate-90">
-        <img
-          key="topdeck"
-          src={Boolean(deck) && index >= 0 ? deck[index].imgUrl : cardback}
-          className="rounded-[3.7rem] lg:rounded-[2.5rem] w-screen lg:w-auto"
-        />
+        <img key="topdeck" src={topCard} className="rounded-[3.7rem] lg:rounded-[2.5rem] w-screen lg:w-auto" />
         <div className="absolute top-0 left-0 w-full flex justify-between p-3">
           <button
             onClick={nextCard}
