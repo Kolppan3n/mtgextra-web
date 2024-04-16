@@ -4,5 +4,5 @@
 
 body {
   background: theme('colors.background.DEFAULT');
-  color: theme('colors.stone.light');
+  color: theme('colors.text.white');
 }

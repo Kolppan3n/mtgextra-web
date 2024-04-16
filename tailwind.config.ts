@@ -12,17 +12,14 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        text: {
+          white: colors.stone['50'],
+          black: colors.stone['950']
+        },
         background: {
           light: colors.stone['700'],
           DEFAULT: colors.stone['800'],
           dark: colors.stone['950'],
-        },
-        stone:{
-          white: colors.stone['50'],
-          light: colors.stone['200'],
-          gray: colors.stone['300'],
-          dark: colors.stone['400'],
-          black: colors.stone['950'],
         },
         gold: '#D0AF71',
         brass: '#A99164'

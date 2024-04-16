@@ -1,9 +1,9 @@
 "use client"
 
 import React, { useEffect, useState } from "react"
+import useLocalStorage from "../useLocalStorage"
+import { Card, fetchDeck, shuffleArray } from "../deckManager"
 import { MdKeyboardBackspace, MdOutlineRestartAlt } from "react-icons/md"
-import useLocalStorage from "../components/useLocalStorage"
-import { Card, fetchDeck, shuffleArray } from "../components/deckManager"
 
 const Planechase = () => {
   const cardback = "https://backs.scryfall.io/large/7/8/7840c131-f96b-4700-9347-2215c43156e6.jpg?1665006192"
