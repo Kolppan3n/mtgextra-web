@@ -33,6 +33,7 @@ const shuffleArray = (array: any[]) => {
     array[j] = temp
   }
   console.log("! The Array has been shuffled !")
+  return array
 }
 
 export { type Card, fetchDeck, shuffleArray }
