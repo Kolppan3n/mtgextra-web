@@ -1,44 +1,44 @@
-"use client";
+"use client"
 
-import React, { useState } from "react";
-import { shuffle, useLocalStorageTest } from "../useLocalStorage";
-import { FlipRoleCard, RoleCard } from "../components/RoleCard";
-import { shuffleArray } from "../deckManager";
+import React, { useState } from "react"
+import { shuffle, useLocalStorageTest } from "../useLocalStorage"
+import { FlipRoleCard } from "../components/RoleCard"
+import { shuffleArray } from "../deckManager"
 
-export type Role = (typeof roleSheet)[number];
-type Player = { name: string; role: Role | null };
+export type Role = (typeof roleSheet)[number]
+type Player = { name: string; role: Role | null }
 
-const roleSheet = ["King", "Guard", "Usurper", "Assassin", "Assassin", "Traitor", "Assassin"] as const;
+const roleSheet = ["King", "Guard", "Usurper", "Assassin", "Assassin", "Traitor", "Assassin"] as const
 
 const Usurper = () => {
-  const [players, setPlayers] = useLocalStorageTest<Player[]>("players", []);
-  const [input, setInput] = useState("");
-  const commenced = players.some((player) => player.role !== null);
+  const [players, setPlayers] = useLocalStorageTest<Player[]>("players", [])
+  const [input, setInput] = useState("")
+  const commenced = players.some((player) => player.role !== null)
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    e.preventDefault()
     if (players.length < 7) {
-      setPlayers([...players, { name: input, role: null }]);
-      setInput("");
+      setPlayers([...players, { name: input, role: null }])
+      setInput("")
     }
-  };
+  }
 
   const startGame = () => {
     if (players.length >= 5) {
-      const shuffledRoles = shuffleArray(roleSheet.slice(0, players.length));
+      const shuffledRoles = shuffleArray(roleSheet.slice(0, players.length))
 
       setPlayers(
         shuffleArray(players).map((player, index) => ({
           ...player,
           role: shuffledRoles[index],
         }))
-      );
+      )
     }
-  };
+  }
 
   const resetGame = () => {
-    setPlayers([]);
-  };
+    setPlayers([])
+  }
 
   return (
     <main className="h-screen flex flex-col items-center">
@@ -82,7 +82,10 @@ const Usurper = () => {
       <div className="flex flex-wrap justify-center max-w-[600px] mt-16 gap-2">
         {players.map((player, index) =>
           !commenced ? (
-            <div key={index} className="relative w-40 h-56 justify-center items-center bg-brass rounded-xl">
+            <div
+              key={index}
+              className="relative w-40 h-56 justify-center items-center bg-brass rounded-xl cursor-pointer"
+            >
               <p className="absolute left-0 right-0 top-3/4 text-center text-text-black text-xl ">{player.name}</p>
             </div>
           ) : (
@@ -96,7 +99,7 @@ const Usurper = () => {
         </button>
       )}
     </main>
-  );
-};
+  )
+}
 
-export default Usurper;
+export default Usurper
