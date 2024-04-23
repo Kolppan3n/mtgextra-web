@@ -1,48 +1,44 @@
-"use client"
+"use client";
 
-import React, { useEffect, useState } from "react"
-import useLocalStorage from "../useLocalStorage"
-import { shuffleArray } from "../deckManager"
-import { RoleCard, FlipRoleCard } from "../components/RoleCard"
+import React, { useState } from "react";
+import { shuffle, useLocalStorageTest } from "../useLocalStorage";
+import { FlipRoleCard, RoleCard } from "../components/RoleCard";
+import { shuffleArray } from "../deckManager";
 
-type Role = { title: string; name: string }
+export type Role = (typeof roleSheet)[number];
+type Player = { name: string; role: Role | null };
+
+const roleSheet = ["King", "Guard", "Usurper", "Assassin", "Assassin", "Traitor", "Assassin"] as const;
 
 const Usurper = () => {
-  const roleSheet = ["King", "Guard", "Usurper", "Assassin", "Assassin", "Traitor", "Assassin"]
+  const [players, setPlayers] = useLocalStorageTest<Player[]>("players", []);
+  const [input, setInput] = useState("");
+  const commenced = players.some((player) => player.role !== null);
 
-  const initRoster: Role[] = []
-  const initPlayers: string[] = []
-
-  const [commenced, setCommenced] = useLocalStorage("commenced", false)
-  const [roster, setRoster] = useLocalStorage("roster", initRoster)
-  const [input, setInput] = useState("")
-  const [players, setPlayers] = useState(initPlayers)
-
-  const handleSubmit = (e: any) => {
-    e.preventDefault()
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     if (players.length < 7) {
-      setPlayers([...players, input])
-      setInput("")
+      setPlayers([...players, { name: input, role: null }]);
+      setInput("");
     }
-  }
+  };
 
   const startGame = () => {
     if (players.length >= 5) {
-      setCommenced(true)
-      const temp: string[] = players
-      shuffleArray(temp)
-      setPlayers(temp)
-      const newRoster: Role[] = players.map((name: string, index: number) => ({ title: roleSheet[index], name }))
-      shuffleArray(newRoster)
-      setRoster(newRoster)
-    }
-  }
+      const shuffledRoles = shuffleArray(roleSheet.slice(0, players.length));
 
-  const resetRoster = () => {
-    setCommenced(false)
-    setPlayers(initPlayers)
-    setRoster(initRoster)
-  }
+      setPlayers(
+        shuffleArray(players).map((player, index) => ({
+          ...player,
+          role: shuffledRoles[index],
+        }))
+      );
+    }
+  };
+
+  const resetGame = () => {
+    setPlayers([]);
+  };
 
   return (
     <main className="h-screen flex flex-col items-center">
@@ -52,49 +48,55 @@ const Usurper = () => {
           <div className="flex flex-col mb-5">
             <label className="mb-2">Player Name</label>
             <input
-              className="rounded-full px-4 py-2 bg-background-light"
+              className="rounded-full px-4 py-2 bg-background-light disabled:bg-red-300"
               type="text"
               required
               value={input}
+              disabled={players.length > 6}
               onChange={(e) => setInput(e.target.value)}
             />
           </div>
           <div className="flex justify-evenly">
-            <button className="rounded-full px-3 py-1 bg-brass text-text-black" type="submit">
+            <button
+              className="rounded-full px-3 py-1 bg-brass text-text-black disabled:bg-red-300"
+              type="submit"
+              disabled={players.length > 6}
+            >
               Add Player
             </button>
-            <button className="rounded-full px-3 py-1 bg-brass text-text-black" type="button" onClick={startGame}>
+            <button
+              className="rounded-full px-3 py-1 bg-brass text-text-black disabled:bg-red-300"
+              type="button"
+              disabled={players.length < 5 || players.length > 7}
+              onClick={startGame}
+            >
               Start
             </button>
-            <button className="rounded-full px-3 py-1 text-text-white border-2" type="button" onClick={resetRoster}>
+            <button className="rounded-full px-3 py-1 text-text-white border-2" type="button" onClick={resetGame}>
               Reset
             </button>
           </div>
         </form>
       )}
 
-      {!commenced ? (
-        <div key="Mockup" className="flex flex-wrap justify-center max-w-[600px] mt-16 gap-2">
-          {players.map((name: string, index: number) => (
+      <div className="flex flex-wrap justify-center max-w-[600px] mt-16 gap-2">
+        {players.map((player, index) =>
+          !commenced ? (
             <div key={index} className="relative w-40 h-56 justify-center items-center bg-brass rounded-xl">
-              <p className="absolute left-0 right-0 top-3/4 text-center text-text-black text-xl ">{name}</p>
+              <p className="absolute left-0 right-0 top-3/4 text-center text-text-black text-xl ">{player.name}</p>
             </div>
-          ))}
-        </div>
-      ) : (
-        <div>
-          <div key="Roster" className="flex flex-wrap justify-center max-w-[600px] mt-16 gap-2">
-            {roster.map((role: Role, index: number) => (
-              <FlipRoleCard key={index} role={role} />
-            ))}
-          </div>
-          <button className="rounded-full px-3 py-1 text-text-white border-2" type="button" onClick={resetRoster}>
-            Reset
-          </button>
-        </div>
+          ) : (
+            <FlipRoleCard key={index} player={player} />
+          )
+        )}
+      </div>
+      {commenced && (
+        <button className="rounded-full px-3 py-1 text-text-white border-2 mt-4" type="button" onClick={resetGame}>
+          Reset
+        </button>
       )}
     </main>
-  )
-}
+  );
+};
 
-export default Usurper
+export default Usurper;
