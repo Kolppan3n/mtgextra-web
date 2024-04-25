@@ -12,8 +12,11 @@ const Planechase = () => {
   const [planarIndex, setPlanarIndex] = useLocalStorage("planarIndex", -1)
   const [topCard, setTopCard] = useState(cardback)
 
+  const allPlanesUrl = "q=t%3Aplane&unique=cards"
+  const onlyMagicUrl = "q=set%3Aopca&unique=cards"
+
   const createPlanarDeck = async () => {
-    const temp = await fetchDeck("https://api.scryfall.com/cards/search?q=set%3Aohop&unique=cards")
+    const temp = await fetchDeck("https://api.scryfall.com/cards/search?" + allPlanesUrl)
     shuffleArray(temp)
     setPlanarDeck(temp)
   }
