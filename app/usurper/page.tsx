@@ -1,9 +1,8 @@
 "use client"
 
 import React, { useState } from "react"
-import { shuffle, useLocalStorageTest } from "../useLocalStorage"
+import { useLocalStorage, shuffleArray } from "../useLocalStorage"
 import { FlipRoleCard } from "../components/RoleCard"
-import { shuffleArray } from "../deckManager"
 
 export type Role = (typeof roleSheet)[number]
 type Player = { name: string; role: Role | null }
@@ -11,7 +10,7 @@ type Player = { name: string; role: Role | null }
 const roleSheet = ["King", "Guard", "Usurper", "Assassin", "Assassin", "Traitor", "Assassin"] as const
 
 const Usurper = () => {
-  const [players, setPlayers] = useLocalStorageTest<Player[]>("players", [])
+  const [players, setPlayers] = useLocalStorage<Player[]>("players", [])
   const [input, setInput] = useState("")
   const commenced = players.some((player) => player.role !== null)
 

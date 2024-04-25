@@ -1,59 +1,42 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from "react"
 
-const getSavedValue = (key: string, initValue: any) => {
-  try {
-    if (localStorage.getItem(key) !== null) {
-      const savedValue = JSON.parse(localStorage.getItem(key) as string);
-      return savedValue;
-    }
-    return initValue;
-  } catch (error) {
-    console.log(error);
-    return initValue;
-  }
-};
-
-const useLocalStorage = (key: string, initValue: any) => {
-  const [value, setValue] = useState(() => {
-    return getSavedValue(key, initValue);
-  });
-
-  useEffect(() => {
-    console.log("! Value Updated !");
-    localStorage.setItem(key, JSON.stringify(value));
-  }, [value]);
-
-  return [value, setValue];
-};
-
-export const shuffle = <T>(array: T[]): T[] => array.slice().sort(() => Math.random() - 0.5);
-
-const getSavedValueTest = <T>(key: string, initValue: T): T => {
+const getSavedValue = <T>(key: string, initValue: T): T => {
   try {
     if (typeof localStorage !== "undefined" && localStorage.getItem(key) !== null) {
-      const savedValue = JSON.parse(localStorage.getItem(key) as string);
-      return savedValue;
+      const savedValue = JSON.parse(localStorage.getItem(key) as string)
+      return savedValue
     }
-    return initValue;
+    return initValue
   } catch (error) {
-    console.log(error);
-    return initValue;
+    console.log(error)
+    return initValue
   }
-};
+}
 
-export const useLocalStorageTest = <T>(key: string, initValue: T): [T, React.Dispatch<React.SetStateAction<T>>] => {
+const useLocalStorage = <T>(key: string, initValue: T): [T, React.Dispatch<React.SetStateAction<T>>] => {
   const [value, setValue] = useState(() => {
-    return getSavedValueTest<T>(key, initValue);
-  });
+    return getSavedValue<T>(key, initValue)
+  })
 
   useEffect(() => {
-    console.log("! Value Updated !");
+    console.log("! Value Updated !")
     if (typeof localStorage !== "undefined") {
-      localStorage.setItem(key, JSON.stringify(value));
+      localStorage.setItem(key, JSON.stringify(value))
     }
-  }, [value]);
+  }, [value])
 
-  return [value, setValue];
-};
+  return [value, setValue]
+}
 
-export default useLocalStorage;
+const shuffleArray = <T>(array: T[]): T[] => {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    const temp = array[i]
+    array[i] = array[j]
+    array[j] = temp
+  }
+  console.log("! The Array has been shuffled !")
+  return array
+}
+
+export { useLocalStorage, shuffleArray }
