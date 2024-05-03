@@ -2,10 +2,10 @@ import Link from "next/link"
 
 export default function Navbar() {
   const links = [
-    { href: "/bounty", name: "Bounty" },
-    { href: "/usurper", name: "Usurper" },
-    { href: "/planechase", name: "Planechase" },
     { href: "/archenemy", name: "Archenemy" },
+    { href: "/bounty", name: "Bounty" },
+    { href: "/planechase", name: "Planechase" },
+    { href: "/usurper", name: "Usurper" },
   ]
 
   return (

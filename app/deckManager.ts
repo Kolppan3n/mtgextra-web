@@ -1,40 +1,23 @@
 type Card = {
-  front: {
     name: string
     oracleId: string
     oracleText: string
     imgUrl: string
-  }
-  back: {
-    name: string
-    oracleId: string
-    oracleText: string
-    imgUrl: string
-  } | null
 }
 
 const fetchDeck = async (url: string) => {
-  const response = await fetch(url)
+  const response = await fetch(url, {next: {revalidate: 60}})
 
   const { data: cardArrayJSON } = await response.json()
 
-  const frontCardArray = cardArrayJSON.card_faces ? cardArrayJSON.card_faces[0] : cardArrayJSON
-  const backCardData = cardArrayJSON.card_faces ? cardArrayJSON.card_faces[1] : null
-
-  console.log("RAW")
-  console.log(cardArrayJSON)
-  console.log("PICKED")
-  console.log(frontCardArray)
-
-  const deck: Card[] = frontCardArray.map((cardJSON: any) => {
-    const card: Card = {front: {
-      name: cardJSON.name,
-      oracleId: cardJSON.oracle_id,
-      oracleText: cardJSON.oracle_text,
-      imgUrl: cardJSON.image_uris.normal,
-    }, back: null}
-    return card
-  })
+  const deck: Card[] = cardArrayJSON.map((card: any) => (
+    {
+      name: card.card_faces ? card.card_faces[0].name : card.name,
+      oracleId: card.oracle_id,
+      oracleText: card.card_faces ? card.card_faces[0].oracle_text : card.oracle_text,
+      imgUrl: card.card_faces ? card.card_faces[0].image_uris.large : card.image_uris.large
+    }
+  ))
 
   console.log("! A New deck has been created !")
 

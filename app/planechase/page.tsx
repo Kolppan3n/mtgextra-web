@@ -12,21 +12,24 @@ const Planechase = () => {
   const [planarIndex, setPlanarIndex] = useLocalStorage("planarIndex", -1)
   const [topCard, setTopCard] = useState(cardback)
 
-  const allPlanesUrl = "q=t%3Aplane&unique=cards"
-  const onlyMagicUrl = "q=set%3Aopca&unique=cards"
+  const OPCA = "set%3Aopca"
+  const MOC = "set%3Amoc"
+  const WHO = "set%3Awho"
+  const or = "+or+"
 
-  const createPlanarDeck = async () => {
-    const temp = await fetchDeck("https://api.scryfall.com/cards/search?" + allPlanesUrl)
-    shuffleArray(temp)
-    setPlanarDeck(temp)
+  const fetchFilter: string = OPCA + or + MOC
+
+  const initPlanarDeck = async () => {
+    const temp = await fetchDeck(`https://api.scryfall.com/cards/search?q=t%3Aplane+%28${fetchFilter}%29`)
+    setPlanarDeck(shuffleArray(temp))
   }
 
   useEffect(() => {
-    if (!(Array.isArray(planarDeck) && planarDeck.length)) createPlanarDeck()
+    if (!(Array.isArray(planarDeck) && planarDeck.length)) initPlanarDeck()
   }, [])
 
   useEffect(() => {
-    setTopCard(planarDeck[planarIndex]?.front.imgUrl ?? cardback)
+    setTopCard(planarDeck[planarIndex]?.imgUrl ?? cardback)
   }, [planarIndex])
 
   const nextCard = () => {
@@ -42,23 +45,15 @@ const Planechase = () => {
   }
 
   const newGame = () => {
-    if (Array.isArray(planarDeck) && planarDeck.length) {
-      const temp: Card[] = [...planarDeck]
-      const firstCard: String = temp[0].front.name
-
-      //Sekotetaan niin monta kertaa että alkaa eri kortilla kuin viime peli
-      while (temp[0].front.name === firstCard) shuffleArray(temp)
-
-      setPlanarDeck(temp)
-      setPlanarIndex(-1)
-    }
+    setPlanarIndex(-1)
+    initPlanarDeck()
   }
 
   return (
     <div className="min-h-screen flex flex-col items-center">
       <div key="planarDeck" className="relative lg:rotate-90 select-none">
         <img
-          className="rounded-[2rem] sm:rounded-[2.5rem] md:rounded-[3.5rem] lg:rounded-[2.5rem] w-screen lg:w-auto"
+          className="rounded-[2rem] sm:rounded-[2.5rem] md:rounded-[3.5rem] lg:rounded-[2.5rem] w-screen lg:w-[750px] lg:h-[1050px]"
           src={topCard}
           key="topdeck"
         />

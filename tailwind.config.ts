@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss'
+import { DEFAULT_CIPHERS } from 'tls'
 
 const colors = require('tailwindcss/colors')
 const plugin = require('tailwindcss/plugin')
@@ -21,8 +22,13 @@ const config: Config = {
           DEFAULT: colors.stone['800'],
           dark: colors.stone['950'],
         },
+        leather: {
+          light: '#BA705D',
+          DEFAULT: '#4B1E1B',
+          dark: '#2A0E0D'
+        },
         gold: '#D0AF71',
-        brass: '#A99164'
+        brass: '#A99164',
       },
       textShadow: {
         sm: '0 1px 2px var(--tw-shadow-color)',
