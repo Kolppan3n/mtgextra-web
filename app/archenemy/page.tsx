@@ -40,7 +40,7 @@ const Archenemy = () => {
   }
 
   const updatePin = () => {
-    pinnedScheme != topCard ? setPinnedScheme(topCard) : setPinnedScheme("")
+    pinnedScheme == "" ? setPinnedScheme(topCard) : setPinnedScheme("")
   }
 
   const newGame = () => {
@@ -76,7 +76,7 @@ const Archenemy = () => {
             className="rounded-full bg-gradient-radial from-black active:from-brass active:to-brass"
             onClick={updatePin}
           >
-            {pinnedScheme != topCard ? (
+            {pinnedScheme == "" ? (
               <TbPin className="size-16 sm:size-24 text-brass active:text-black" />
             ) : (
               <TbPinnedOff className="size-16 sm:size-24 text-brass active:text-black" />
