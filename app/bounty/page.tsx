@@ -5,6 +5,7 @@ import { useLocalStorage, shuffleArray } from "../useLocalStorage"
 import { Card, fetchDeck } from "../deckManager"
 import { MdKeyboardBackspace, MdOutlineRestartAlt } from "react-icons/md"
 import { GiWantedReward } from "react-icons/gi"
+import MagicButton from "../components/MagicButton"
 
 const Bounty = () => {
   const cardback = "https://cards.scryfall.io/large/back/a/c/acd27632-4c28-4dc3-90ad-b94fe176b91a.jpg?1712319002"
@@ -53,6 +54,7 @@ const Bounty = () => {
   }
 
   const newGame = () => {
+    setBountyLevel(1)
     setBountyIndex(-1)
     initBountyDeck()
   }
@@ -66,35 +68,13 @@ const Bounty = () => {
           key="topdeck"
         />
         <div className="absolute top-0 left-0 w-full flex justify-between p-3">
-          <button
-            className="rounded-full bg-gradient-radial from-black active:from-brass active:to-brass disabled:invisible"
-            onClick={prevCard}
-          >
-            <MdKeyboardBackspace className="size-16 sm:size-24 fill-brass active:fill-black" />
-          </button>
-          <button
-            className="rounded-full bg-gradient-radial from-black active:from-brass active:to-brass"
-            onClick={nextCard}
-          >
-            <MdKeyboardBackspace className="size-16 sm:size-24 rotate-180 fill-brass active:fill-black" />
-          </button>
+          <MagicButton btnType="back" onClick={prevCard} />
+          <MagicButton btnType="next" onClick={nextCard} />
         </div>
         <div className="absolute bottom-0 left-0 w-full flex justify-between p-3">
-          <button
-            className="size-16 sm:size-24 rounded-full bg-gradient-radial from-black active:from-brass active:to-brass"
-            onClick={increaseBounty}
-          >
-            <p className="text-brass text-6xl sm:text-8xl active:fill-black">{bountyLevel}</p>
-          </button>
-          <button className="bg-gradient-radial from-black active:from-brass active:to-brass" onClick={showRules}>
-            <GiWantedReward className="size-16 sm:size-24 fill-brass active:fill-black" />
-          </button>
-          <button
-            className="rounded-full bg-gradient-radial from-black active:from-brass active:to-brass"
-            onClick={newGame}
-          >
-            <MdOutlineRestartAlt className="size-16 sm:size-24 fill-brass active:fill-black" />
-          </button>
+          <MagicButton btnType={bountyLevel} onClick={increaseBounty} />
+          <MagicButton btnType="wanted" onClick={showRules} />
+          <MagicButton btnType="reset" onClick={newGame} />
         </div>
       </div>
     </div>

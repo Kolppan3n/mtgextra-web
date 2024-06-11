@@ -3,8 +3,7 @@
 import React, { useEffect, useState } from "react"
 import { useLocalStorage, shuffleArray } from "../useLocalStorage"
 import { Card, fetchDeck } from "../deckManager"
-import { MdKeyboardBackspace, MdOutlineRestartAlt } from "react-icons/md"
-import { TbPin, TbPinnedOff } from "react-icons/tb"
+import MagicButton from "../components/MagicButton"
 
 const Archenemy = () => {
   const cardback = "https://backs.scryfall.io/large/1/b/1b2396d4-9048-439d-96bd-354288518841.jpg?1665006146"
@@ -58,36 +57,12 @@ const Archenemy = () => {
         />
         <img className="absolute top-0 bottom-1/4 left-0 right-0 m-auto w-[30vh]" src={pinnedScheme} key="ongoing" />
         <div className="absolute top-0 left-0 w-full flex justify-between p-3">
-          <button
-            className="rounded-full bg-gradient-radial from-black active:from-brass active:to-brass disabled:invisible"
-            onClick={prevCard}
-          >
-            <MdKeyboardBackspace className="size-16 sm:size-24 fill-brass active:fill-black" />
-          </button>
-          <button
-            className="rounded-full bg-gradient-radial from-black active:from-brass active:to-brass"
-            onClick={nextCard}
-          >
-            <MdKeyboardBackspace className="size-16 sm:size-24 rotate-180 fill-brass active:fill-black" />
-          </button>
+          <MagicButton btnType="back" onClick={prevCard} />
+          <MagicButton btnType="next" onClick={nextCard} />
         </div>
         <div className="absolute bottom-0 left-0 w-full  flex justify-between p-3">
-          <button
-            className="rounded-full bg-gradient-radial from-black active:from-brass active:to-brass"
-            onClick={updatePin}
-          >
-            {pinnedScheme == "" ? (
-              <TbPin className="size-16 sm:size-24 text-brass active:text-black" />
-            ) : (
-              <TbPinnedOff className="size-16 sm:size-24 text-brass active:text-black" />
-            )}
-          </button>
-          <button
-            className="rounded-full bg-gradient-radial from-black active:from-brass active:to-brass"
-            onClick={newGame}
-          >
-            <MdOutlineRestartAlt className="size-16 sm:size-24 fill-brass active:fill-black" />
-          </button>
+          <MagicButton btnType={pinnedScheme == "" ? "pin" : "unpin"} onClick={updatePin} />
+          <MagicButton btnType="reset" onClick={newGame} />
         </div>
       </div>
     </div>

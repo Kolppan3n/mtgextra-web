@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react"
 import { useLocalStorage, shuffleArray } from "../useLocalStorage"
 import { Card, fetchDeck } from "../deckManager"
 import { MdKeyboardBackspace, MdOutlineRestartAlt } from "react-icons/md"
+import MagicButton from "../components/MagicButton"
 
 const Planechase = () => {
   const cardback = "https://backs.scryfall.io/large/7/8/7840c131-f96b-4700-9347-2215c43156e6.jpg?1665006192"
@@ -58,26 +59,11 @@ const Planechase = () => {
           key="topdeck"
         />
         <div className="absolute top-0 left-0 w-full flex justify-between p-3">
-          <button
-            className="rounded-full bg-gradient-radial from-black active:from-brass active:to-brass disabled:invisible"
-            onClick={nextCard}
-          >
-            <MdKeyboardBackspace className="size-16 sm:size-24 rotate-90 fill-brass active:fill-black" />
-          </button>
-          <button
-            className="rounded-full bg-gradient-radial from-black active:from-brass active:to-brass"
-            onClick={newGame}
-          >
-            <MdOutlineRestartAlt className="size-16 sm:size-24 -rotate-90 fill-brass active:fill-black" />
-          </button>
+          <MagicButton btnType="next" onClick={nextCard} className="-rotate-90" />
+          <MagicButton btnType="reset" onClick={newGame} className="-rotate-90" />
         </div>
         <div className="absolute bottom-0 left-0 w-full  flex justify-between p-3">
-          <button
-            className="rounded-full bg-gradient-radial from-black active:from-brass active:to-brass"
-            onClick={prevCard}
-          >
-            <MdKeyboardBackspace className="size-16 sm:size-24 -rotate-90 fill-brass active:fill-black" />
-          </button>
+          <MagicButton btnType="back" onClick={prevCard} className="-rotate-90" />
         </div>
       </div>
     </div>
