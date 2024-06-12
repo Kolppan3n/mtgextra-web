@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from "react"
 import { useLocalStorage, shuffleArray } from "../useLocalStorage"
 import { Card, fetchDeck } from "../deckManager"
-import { MdKeyboardBackspace, MdOutlineRestartAlt } from "react-icons/md"
 import MagicButton from "../components/MagicButton"
 
 const Planechase = () => {

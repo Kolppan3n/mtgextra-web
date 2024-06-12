@@ -2,7 +2,7 @@
 
 import React, { useState } from "react"
 import { useLocalStorage, shuffleArray } from "../useLocalStorage"
-import { FlipRoleCard } from "../components/RoleCard"
+import { RoleCard } from "../components/RoleCard"
 
 export type Role = (typeof roleSheet)[number]
 type Player = { name: string; role: Role | null }
@@ -42,7 +42,10 @@ const Usurper = () => {
   return (
     <main className="h-screen flex flex-col items-center">
       {!commenced && (
-        <form className="w-full max-w-xs flex flex-col mt-12 rounded-xl py-6 px-4" onSubmit={handleSubmit}>
+        <form
+          className="scale-[0.6] sm:scale-100 w-full max-w-xs flex flex-col -mt-14 sm:mt-12 rounded-xl py-6 px-4"
+          onSubmit={handleSubmit}
+        >
           <label className="text-center text-xl mb-5">New Game</label>
           <div className="flex flex-col mb-5">
             <label className="mb-2">Player Name</label>
@@ -78,19 +81,10 @@ const Usurper = () => {
         </form>
       )}
 
-      <div className="flex flex-wrap justify-center max-w-[600px] mt-16 gap-2">
-        {players.map((player, index) =>
-          !commenced ? (
-            <div
-              key={index}
-              className="relative w-40 h-56 justify-center items-center bg-brass rounded-xl cursor-pointer"
-            >
-              <p className="absolute left-0 right-0 top-3/4 text-center text-text-black text-xl ">{player.name}</p>
-            </div>
-          ) : (
-            <FlipRoleCard key={index} player={player} />
-          )
-        )}
+      <div className="flex flex-wrap justify-center max-w-[600px] sm:mt-16 gap-2">
+        {players.map((player, index) => (
+          <RoleCard key={index} player={player} />
+        ))}
       </div>
       {commenced && (
         <button className="rounded-full px-3 py-1 text-text-white border-2 mt-4" type="button" onClick={resetGame}>

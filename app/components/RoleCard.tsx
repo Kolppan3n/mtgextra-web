@@ -23,11 +23,16 @@ const getIcon = (role: Role | null) => {
   }
 }
 
-const FlipRoleCard = ({ player }: { player: PlayerCardProps }) => {
+const RoleCard = ({ player }: { player: PlayerCardProps }) => {
   const [isFlipped, setIsFlipped] = useState(false)
 
   return (
-    <div className="w-40 h-56 [perspective:1000px] cursor-pointer" onClick={() => setIsFlipped((prev) => !prev)}>
+    <div
+      className="scale-[0.6] sm:scale-100 w-40 h-56 -mx-8 -my-11 sm:m-0 [perspective:1000px] cursor-pointer"
+      onClick={() => {
+        if (player.role) setIsFlipped((prev) => !prev)
+      }}
+    >
       <div
         className={cn("relative w-full h-full transition-all duration-500 [transform-style:preserve-3d]", {
           "[transform:rotateY(180deg)]": isFlipped || player.role === "King",
@@ -45,7 +50,7 @@ const FlipRoleCard = ({ player }: { player: PlayerCardProps }) => {
           {/*Back side*/}
           <div className="absolute flex justify-center left-0 right-0 bottom-1/3">{getIcon(player.role)}</div>
           <p className="absolute left-0 right-0 top-3/4 text-center text-text-black text-xl">
-            {player.role === "King" ? player.name : player.role}
+            {player.role === "King" ? player.name : player.role ? player.role : "unknown"}
           </p>
         </div>
       </div>
@@ -53,4 +58,4 @@ const FlipRoleCard = ({ player }: { player: PlayerCardProps }) => {
   )
 }
 
-export { FlipRoleCard }
+export { RoleCard }
