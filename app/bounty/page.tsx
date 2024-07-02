@@ -1,10 +1,8 @@
 "use client"
 
 import React, { useEffect, useState } from "react"
-import { useLocalStorage, shuffleArray } from "../useLocalStorage"
+import { useLocalStorage, shuffleArray } from "../hooks/useLocalStorage"
 import { Card, fetchDeck } from "../deckManager"
-import { MdKeyboardBackspace, MdOutlineRestartAlt } from "react-icons/md"
-import { GiWantedReward } from "react-icons/gi"
 import MagicButton from "../components/MagicButton"
 
 const Bounty = () => {
