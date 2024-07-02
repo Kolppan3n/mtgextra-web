@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState } from "react"
-import { useLocalStorage, shuffleArray } from "../useLocalStorage"
+import { useLocalStorage, shuffleArray } from "../hooks/useLocalStorage"
 import { RoleCard } from "../components/RoleCard"
 
 export type Role = (typeof roleSheet)[number]

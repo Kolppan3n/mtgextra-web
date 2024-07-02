@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useEffect, useState } from "react"
-import { useLocalStorage, shuffleArray } from "../useLocalStorage"
+import { useLocalStorage, shuffleArray } from "../hooks/useLocalStorage"
 import { Card, fetchDeck } from "../deckManager"
 import MagicButton from "../components/MagicButton"
 

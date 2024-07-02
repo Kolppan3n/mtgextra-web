@@ -9,7 +9,7 @@ export default function Navbar() {
   ]
 
   return (
-    <nav className="flex justify-center h-[80px] p-4 bg-gradient-to-t from-transparent via-background-dark to-background-dark">
+    <nav className="flex justify-center h-[80px] p-4 bg-gradient-to-t from-transparent to-background_old-dark">
       <div className="flex flex-row items-center mt-2 lg:mt-0">
         {links.map((link) => (
           <Link key={link.name} href={link.href} className="hover:text-stone-white text-xl my-1 sm:mx-4 sm:my-0">
