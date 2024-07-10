@@ -58,22 +58,20 @@ const Bounty = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col items-center">
-      <div key="archenemyDeck" className="relative select-none">
-        <img
-          className="rounded-[2rem] sm:rounded-[2.5rem] md:rounded-[3.5rem] lg:rounded-[2.5rem] w-screen md:w-[750px] md:h-[1050px]"
-          src={topCard}
-          key="topdeck"
-        />
-        <div className="absolute top-0 left-0 w-full flex justify-between p-3">
-          <MagicButton btnType="back" onClick={prevCard} />
-          <MagicButton btnType="next" onClick={nextCard} />
-        </div>
-        <div className="absolute bottom-0 left-0 w-full flex justify-between p-3">
-          <MagicButton btnType={bountyLevel} onClick={increaseBounty} />
-          <MagicButton btnType="wanted" onClick={showRules} />
-          <MagicButton btnType="reset" onClick={newGame} />
-        </div>
+    <div key="archenemyDeck" className="relative select-none max-h-screen min-w-screen md:w-[750px] md:h-[1050px]">
+      <img
+        className="rounded-[2rem] sm:rounded-[2.5rem] md:rounded-[3.5rem] lg:rounded-[2.5rem]"
+        src={topCard}
+        key="topdeck"
+      />
+      <div className="absolute top-0 left-0 w-full flex justify-between p-3">
+        <MagicButton btnType="back" onClick={prevCard} />
+        <MagicButton btnType="next" onClick={nextCard} />
+      </div>
+      <div className="absolute bottom-0 left-0 w-full flex justify-between p-3">
+        <MagicButton btnType={bountyLevel} onClick={increaseBounty} />
+        <MagicButton btnType="wanted" onClick={showRules} />
+        <MagicButton btnType="reset" onClick={newGame} />
       </div>
     </div>
   )
