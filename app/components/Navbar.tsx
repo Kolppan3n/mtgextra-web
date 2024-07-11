@@ -2,10 +2,10 @@
 
 import Link from "next/link"
 import { useMediaQuery } from "../hooks/use-media-query"
-import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger } from "./Drawer"
 import { MenuIcon } from "lucide-react"
 import { FC } from "react"
 import { cn } from "../utils"
+import { Sheet, SheetClose, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "./Sheet"
 
 interface NavbarProps {
   className?: string
@@ -21,21 +21,26 @@ const Navbar: FC<NavbarProps> = ({ className }) => {
   ]
 
   return isMobile ? (
-    <Drawer direction="right">
-      <DrawerTrigger>
-        <MenuIcon />
-      </DrawerTrigger>
-      <DrawerContent>
-        <DrawerHeader>
-          <DrawerTitle>Game Modes</DrawerTitle>
-        </DrawerHeader>
-        {links.map((link) => (
-          <Link key={link.name} href={link.href} className="hover:text-stone-white text-xl my-1 sm:mx-4 sm:my-0">
-            {link.name}
-          </Link>
-        ))}
-      </DrawerContent>
-    </Drawer>
+    <div className={cn("flex justify-center", className)}>
+      <Sheet>
+        <SheetTrigger>
+          <MenuIcon />
+        </SheetTrigger>
+        <SheetContent>
+          <SheetHeader>
+            <SheetTitle>Gamemodes</SheetTitle>
+            <SheetDescription>Lista kaikista pelimuodoista joita voi pelata.</SheetDescription>
+          </SheetHeader>
+          <div className="flex flex-col">
+            {links.map((link) => (
+              <Link key={link.name} href={link.href} className="hover:text-stone-white text-xl my-1 sm:mx-4 sm:my-0">
+                {link.name}
+              </Link>
+            ))}
+          </div>
+        </SheetContent>
+      </Sheet>
+    </div>
   ) : (
     <nav
       className={cn(
