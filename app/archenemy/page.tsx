@@ -48,22 +48,20 @@ const Archenemy = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col items-center">
-      <div key="archenemyDeck" className="relative select-none">
-        <img
-          className="rounded-[2rem] sm:rounded-[2.5rem] md:rounded-[3.5rem] lg:rounded-[2.5rem] w-screen md:w-[750px] md:h-[1050px]"
-          src={topCard}
-          key="topdeck"
-        />
-        <img className="absolute top-0 bottom-1/4 left-0 right-0 m-auto w-[30vh]" src={pinnedScheme} key="ongoing" />
-        <div className="absolute top-0 left-0 w-full flex justify-between p-3">
-          <MagicButton btnType="back" onClick={prevCard} />
-          <MagicButton btnType="next" onClick={nextCard} />
-        </div>
-        <div className="absolute bottom-0 left-0 w-full  flex justify-between p-3">
-          <MagicButton btnType={pinnedScheme == "" ? "pin" : "unpin"} onClick={updatePin} />
-          <MagicButton btnType="reset" onClick={newGame} />
-        </div>
+    <div key="archenemyDeck" className="relative select-none w-full max-w-[750px] max-h-[1050px]">
+      <img
+        className="rounded-[2rem] sm:rounded-[2.5rem] md:rounded-[3.5rem] lg:rounded-[2.5rem] w-full h-full"
+        src={topCard}
+        key="topdeck"
+      />
+      <img className="absolute top-0 bottom-1/4 left-0 right-0 m-auto w-[30vh]" src={pinnedScheme} key="ongoing" />
+      <div className="absolute top-0 left-0 w-full flex justify-between p-3">
+        <MagicButton btnType="back" onClick={prevCard} />
+        <MagicButton btnType="next" onClick={nextCard} />
+      </div>
+      <div className="absolute bottom-0 left-0 w-full  flex justify-between p-3">
+        <MagicButton btnType={pinnedScheme == "" ? "pin" : "unpin"} onClick={updatePin} />
+        <MagicButton btnType="reset" onClick={newGame} />
       </div>
     </div>
   )

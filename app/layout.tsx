@@ -13,9 +13,7 @@ export const metadata: Metadata = {
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang="en">
-      <body
-        className={`${inter.className} dark h-screen w-screen relative overflow-hidden md:static md:flex md:flex-col`}
-      >
+      <body className={`${inter.className} dark h-screen w-screen relative md:static md:flex md:flex-col`}>
         <Navbar className="absolute top-0 left-0 right-0 z-10 md:static" />
         <div className="absolute w-full h-screen flex items-center justify-center md:h-full md:static">{children}</div>
       </body>

@@ -5,7 +5,7 @@ import { useMediaQuery } from "../hooks/use-media-query"
 import { MenuIcon } from "lucide-react"
 import { FC } from "react"
 import { cn } from "../utils"
-import { Sheet, SheetClose, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "./Sheet"
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "./Sheet"
 
 interface NavbarProps {
   className?: string

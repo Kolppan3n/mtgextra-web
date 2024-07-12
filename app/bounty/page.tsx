@@ -58,7 +58,7 @@ const Bounty = () => {
   }
 
   return (
-    <div key="archenemyDeck" className="relative select-none w-full md:w-[750px] md:h-[1050px]">
+    <div key="archenemyDeck" className="relative select-none w-full max-w-[750px] max-h-[1050px]">
       <img
         className="rounded-[2rem] sm:rounded-[2.5rem] md:rounded-[3.5rem] lg:rounded-[2.5rem] w-full h-full"
         src={topCard}

@@ -50,20 +50,18 @@ const Planechase = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col items-center">
-      <div key="planarDeck" className="relative lg:rotate-90 select-none">
-        <img
-          className="rounded-[2rem] sm:rounded-[2.5rem] md:rounded-[3.5rem] lg:rounded-[2.5rem] w-screen lg:w-[750px] lg:h-[1050px]"
-          src={topCard}
-          key="topdeck"
-        />
-        <div className="absolute top-0 left-0 w-full flex justify-between p-3">
-          <MagicButton btnType="next" onClick={nextCard} className="-rotate-90" />
-          <MagicButton btnType="reset" onClick={newGame} className="-rotate-90" />
-        </div>
-        <div className="absolute bottom-0 left-0 w-full  flex justify-between p-3">
-          <MagicButton btnType="back" onClick={prevCard} className="-rotate-90" />
-        </div>
+    <div key="planarDeck" className="relative select-none lg:rotate-90 w-full max-w-[750px] max-h-[1050px]">
+      <img
+        className="rounded-[2rem] sm:rounded-[2.5rem] md:rounded-[3.5rem] lg:rounded-[2.5rem] h-full w-full"
+        src={topCard}
+        key="topdeck"
+      />
+      <div className="absolute top-0 left-0 w-full flex justify-between p-3">
+        <MagicButton btnType="next" onClick={nextCard} className="-rotate-90" />
+        <MagicButton btnType="reset" onClick={newGame} className="-rotate-90" />
+      </div>
+      <div className="absolute bottom-0 left-0 w-full  flex justify-between p-3">
+        <MagicButton btnType="back" onClick={prevCard} className="-rotate-90" />
       </div>
     </div>
   )

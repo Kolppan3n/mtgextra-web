@@ -40,12 +40,9 @@ const Usurper = () => {
   }
 
   return (
-    <main className="h-screen flex flex-col items-center">
+    <main className="flex flex-col items-center">
       {!commenced && (
-        <form
-          className="scale-[0.6] sm:scale-100 w-full max-w-xs flex flex-col -mt-14 sm:mt-12 rounded-xl py-6 px-4"
-          onSubmit={handleSubmit}
-        >
+        <form className="scale-[0.6] sm:scale-100 w-full max-w-xs flex flex-col rounded-xl p-6" onSubmit={handleSubmit}>
           <label className="text-center text-xl mb-5">New Game</label>
           <div className="flex flex-col mb-5">
             <label className="mb-2">Player Name</label>
@@ -81,7 +78,7 @@ const Usurper = () => {
         </form>
       )}
 
-      <div className="flex flex-wrap justify-center max-w-[600px] sm:mt-16 gap-2">
+      <div className="flex flex-wrap justify-center min-h-[504px] max-w-[600px] p-6 gap-2">
         {players.map((player, index) => (
           <RoleCard key={index} player={player} />
         ))}
