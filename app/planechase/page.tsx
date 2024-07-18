@@ -50,9 +50,9 @@ const Planechase = () => {
   }
 
   return (
-    <div key="planarDeck" className="relative select-none lg:rotate-90 w-full max-w-[750px] max-h-[1050px]">
+    <div key="planarDeck" className="relative select-none w-full max-w-[750px] lg:rotate-90">
       <img
-        className="rounded-[2rem] sm:rounded-[2.5rem] md:rounded-[3.5rem] lg:rounded-[2.5rem] h-full w-full"
+        className="rounded-[2rem] sm:rounded-[2.5rem] md:rounded-[3.5rem] lg:rounded-[2.5rem] w-full max-h-[1050px]"
         src={topCard}
         key="topdeck"
       />

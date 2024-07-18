@@ -47,7 +47,7 @@ const Usurper = () => {
           <div className="flex flex-col mb-5">
             <label className="mb-2">Player Name</label>
             <input
-              className="rounded-full px-4 py-2 bg-background-light disabled:bg-red-300"
+              className="rounded-full text-text-black px-4 py-2 bg-background-light disabled:bg-red-300"
               type="text"
               required
               value={input}
@@ -78,7 +78,7 @@ const Usurper = () => {
         </form>
       )}
 
-      <div className="flex flex-wrap justify-center min-h-[504px] max-w-[600px] p-6 gap-2">
+      <div className="flex flex-wrap justify-center min-h-[328px] sm:min-h-[504px] max-w-[352px] sm:max-w-[544px] p-6 gap-2">
         {players.map((player, index) => (
           <RoleCard key={index} player={player} />
         ))}
