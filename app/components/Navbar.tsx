@@ -12,7 +12,7 @@ interface NavbarProps {
 }
 
 const Navbar: FC<NavbarProps> = ({ className }) => {
-  const isMobile = !useMediaQuery("(min-width: 1024px)")
+  const isMobile = useMediaQuery("(max-width: 1024px)")
   const links = [
     { href: "/archenemy", name: "Archenemy" },
     { href: "/bounty", name: "Bounty" },
